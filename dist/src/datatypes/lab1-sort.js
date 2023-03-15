@@ -16,5 +16,6 @@ function selectionSort(arr) {
     return arr;
 }
 let numArray = [5, 4, 2, 6, 7, 8, 23, 5, 7, 8];
-const ss = selectionSort(numArray);
+const stringArr = ["foo", "bar", "baz"];
+const ss = selectionSort(stringArr);
 console.log(ss);
