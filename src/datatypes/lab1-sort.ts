@@ -1,22 +1,29 @@
-function selectionSort<T>(arr: T[]): T[] {
-  for (let i = 0; i < arr.length - 1; i++) {
+function selectionSort<T>(arr: T[], compare: (a: T, b: T) => number): T[] {
+  const n = arr.length;
+
+  for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[minIndex]) {
+
+    for (let j = i + 1; j < n; j++) {
+      if (compare(arr[j], arr[minIndex]) < 0) {
         minIndex = j;
       }
     }
+
     if (minIndex !== i) {
-      const temp = arr[i];
-      arr[i] = arr[minIndex];
-      arr[minIndex] = temp;
+      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
     }
   }
+
   return arr;
 }
 
-let numArray: number[] = [5, 4, 2, 6, 7, 8, 23, 5, 7, 8];
-const stringArr: string[] = ["foo", "bar", "baz"];
-const ss = selectionSort(stringArr);
+// Sắp xếp mảng số nguyên tăng dần
+const numbers = [5, 2, 9, 1, 5, 6];
+const sortedNumbers = selectionSort(numbers, (a, b) => a - b);
+console.log(sortedNumbers);
 
-console.log(ss);
+// Sắp xếp mảng chuỗi theo thứ tự bảng chữ cái giảm dần
+const strings = ["abc", "def", "hij", "klm", "nop"];
+const sortedStrings = selectionSort(strings, (a, b) => b.localeCompare(a));
+console.log(sortedStrings);
